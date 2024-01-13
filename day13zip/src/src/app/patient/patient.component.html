@@ -1,0 +1,103 @@
+
+<div class="bootstrap-wrapper">
+    <div class="container">
+        <div class="row" style="margin-top: 20px;">
+            <div class="col-md-6 offset-md-3">
+                <h3 class="text-center">Patient Details</h3>
+                <div>     
+    <label for="username">Username:</label>    
+    <input [(ngModel)]="username" id="username" placeholder="Enter Username Admin/Guest" (change)="checkUser()" />    
+</div>     
+<div class="mb-3">        
+    <h3> Patient Details</h3>       
+    <label for="newPatientName">Name:</label>       
+    <input [(ngModel)]="newPatient.name" id="newPatientName" />     
+</div>     
+<div class="mb-3">        
+    <label for="newPatientDisease">Disease:</label>        
+    <input [(ngModel)]="newPatient.disease" id="newPatientDisease" />      
+</div>     
+<div class="mb-3">       
+    <label for="newPatientDoc">Doctor:</label>       
+    <input [(ngModel)]="newPatient.doc" id="newPatientDoc" />     
+</div>     <div class="mb-3">       
+    <label for="newPatientStage">Stage:</label>       
+    <select [(ngModel)]="newPatient.stage" id="newPatientStage">         
+        <option value="normal">Normal</option>         
+        
+        <option value="severe">Severe</option>        
+        <option value="critical">Critical</option>       
+    </select>     
+</div>  
+<div>         
+    <button [disabled]="!isAdmin" class="btn btn-warning" (click)="submitPatient()">Submit</button>         
+    <div class="mb-3">      
+<div>      
+    <div class="mb-3">        
+        <div class="mb-3">            
+            <h3>Update Patient Details</h3>           
+            <label for="updatedPatientId">ID:</label>           
+            <input [(ngModel)]="id" id="updatedpatientID" />         
+        </div>             
+        <div class="mb-3">           
+            <label for="updatedPatientDoc">Doctor:</label>           
+            <input [(ngModel)]="updatedPatient.doc" id="updatedPatientDoc" />         
+        </div>             
+        <div class="mb-3">           
+            <label for="updatedPatientStage">Stage:</label>           
+            <select [(ngModel)]="updatedPatient.stage" id="updatedPatientStage">             
+                <option value="normal">Normal</option>             
+                <option value="severe">Severe</option>             
+                <option value="critical">Critical</option>           
+            </select>         
+        </div>         
+        <div>         
+            <button [disabled]="!isAdmin" class="btn btn-warning" (click)="updatePatient(id)">Submit</button>  
+            <div class="mb-3">        
+                <label for="filterByName">Filter by ID:</label>        
+                
+                <input [(ngModel)]="filterById" id="filterById" />        
+                <button class="btn btn-primary" (click)="getPatient(id)">Filter</button>      
+            </div>       
+            <div class="mb-3">        
+                <label for="filterByName">Filter by Name:</label>        
+                
+                <input [(ngModel)]="filterByName" id="filterByName" />        
+                <button class="btn btn-primary" (click)="loadPatientdetailByName(filterByName)">Filter</button>      
+            </div>        
+            <div class="mb-3">        
+                <label for="filterByDoc">Filter by Doctor:</label>        
+                <input [(ngModel)]="filterByDoc" id="filterByDoc" />        
+                <button class="btn btn-primary" (click)="loadPatientdetailByDoc(filterByDoc)">Filter</button>      
+            </div>        
+            <div class="mb-3">          
+                <label for="filterByStage">Filter by Stage:</label>          
+                <select [(ngModel)]="filterByStage" id="filterByStage">            
+                    <option value="normal">Normal</option>            
+                    <option value="severe">Severe</option>           
+                    <option value="critical">Critical</option>         
+                </select>         
+                <button class="btn btn-primary" (click)="loadPatientdetailByStage(filterByStage)">Filter</button>       
+            </div>     
+            <table class="table mt-4">       
+                <thead>         
+                    <tr>         
+                    </tr>       
+                </thead>       
+                <tbody>         
+                    <tr *ngFor="let patient of patients" [class]="getStageClass(patient.stage)">            
+                        <td>{{patient.id}}</td>           
+                        <td>{{ patient.name }}</td>           
+                        <td>{{ patient.disease }}</td>           
+                        <td>{{ patient.doc }}</td>           
+                        <td>{{ patient.stage }}</td>           
+                        <td>             
+                            <button [disabled]="!isAdmin" class="btn btn-danger" (click)="deletePatient(patient.id)">Delete</button>           
+                        </td>         
+                    </tr>       
+                </tbody>     
+            </table> 
+        </div>
+    </div>
+</div>
+</div> 
